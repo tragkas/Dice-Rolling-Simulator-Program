@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dice Rolling Simulator</title>
+	<style>
+		#container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+			font-size: 2rem;
+		}
+		.dice {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border: 1px solid #000;
+			border-radius: 5px;
+			width: 80px;
+			height: 80px;
+			margin: 10px;
+			font-weight: bold;
+			font-size: 3rem;
+		}
+		button {
+			padding: 10px 20px;
+			font-size: 1.5rem;
+			margin: 20px;
+			border-radius: 5px;
+			border: none;
+			background-color: #009688;
+			color: #fff;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<div id="dice-container"></div>
+		<div id="total"></div>
+		<button id="roll-button">Roll</button>
+	</div>
+	<script>
+		const diceContainer = document.getElementById('dice-container');
+		const totalElement = document.getElementById('total');
+		const rollButton = document.getElementById('roll-button');
+		let dice = [];
+		let total = 0;
+
+		function rollDice() {
+			dice = [];
+			total = 0;
+			diceContainer.innerHTML = '';
+			const numDice = parseInt(prompt('How many dice would you like to roll?'));
+			for (let i = 0; i < numDice; i++) {
+				const roll = Math.floor(Math.random() * 6) + 1;
+				dice.push(roll);
+				const die = document.createElement('div');
+				die.classList.add('dice');
+				die.innerText = roll;
+				diceContainer.appendChild(die);
+				total += roll;
+			}
+			totalElement.innerText = `Total: ${total}`;
+		}
+
+		rollButton.addEventListener('click', rollDice);
+	</script>
+</body>
+</html>
